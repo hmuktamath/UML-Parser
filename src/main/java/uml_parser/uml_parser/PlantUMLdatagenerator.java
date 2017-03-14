@@ -14,15 +14,22 @@ public class PlantUMLdatagenerator {
 			List<UMLVariable> variableNames = classData.get(className).get(0);
 			for (UMLVariable umlVariable : variableNames) {
 				/// "-str : String"+"\n"
-			
+
 				umldata.append(umlVariable.varName + " : " + umlVariable.varType + "\n");
 			}
 			// umldata.append("");
 			List<UMLMethod> methodContents = classData.get(className).get(1);
 			for (UMLMethod umlMethods : methodContents) {
-				umldata.append(umlMethods.methName + "() :" +umlMethods.methReturnType  +"\n");
+				String accessSpecifier = umlMethods.methAccessSpecifier;
+				umldata.append(accessSpecifier+" "+umlMethods.methName + "() :" + umlMethods.methReturnType + "\n");
 			}
+
+			
 			umldata.append("} \n");
+			List parentClassList = classData.get(className).get(2);
+			if (parentClassList != null) {
+				umldata.append(parentClassList.get(0) + " <|-- " + className+"\n");
+			}
 		}
 		umldata.append("@enduml\n");
 		return umldata.toString();

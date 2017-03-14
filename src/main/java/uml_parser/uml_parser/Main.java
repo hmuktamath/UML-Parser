@@ -13,7 +13,7 @@ import net.sourceforge.plantuml.SourceStringReader;
 
 public class Main {
 
-	public static void main(String[] input) throws IOException {
+	public static void main(String[] input) throws IOException, ClassNotFoundException {
 		// String srcDir = input[0];
 		// String destFile = input[1];
 		// write logic to get all the java files in srcDir
@@ -31,7 +31,7 @@ public class Main {
 
 		String umlData = plantUMLdatagenerator.generateUMLData(completeParsedData);
 	//	System.out.println(umlData);
-		File pngFile = new File("/tmp/sunday.png");
+		File pngFile = new File("/tmp/monday.png");
 		OutputStream png = new FileOutputStream(pngFile);
 		
 		SourceStringReader reader = new SourceStringReader(umlData);

@@ -10,7 +10,7 @@ public class Table {
 class Row{
 	public static final String ROW = "row_name";
 	public int rowId = 1;
-	public void setRowId(int num){
+	private void setRowId(int num){
 	}
 	
 	public int getRowId() {
@@ -19,5 +19,5 @@ class Row{
 	}	
 
 
-class Column extends Row{
+class Column extends Row implements java.io.Serializable{
 }
