@@ -21,6 +21,7 @@ public class PlantUMLdatagenerator {
 			List<UMLMethod> methodContents = classData.get(className).get(1);
 			for (UMLMethod umlMethods : methodContents) {
 				String accessSpecifier = umlMethods.methAccessSpecifier;
+				
 				umldata.append(accessSpecifier+" "+umlMethods.methName + "() :" + umlMethods.methReturnType + "\n");
 			}
 

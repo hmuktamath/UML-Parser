@@ -16,7 +16,7 @@ public class Main {
 	public static void main(String[] input) throws IOException, ClassNotFoundException {
 		// String srcDir = input[0];
 		// String destFile = input[1];
-		// write logic to get all the java files in srcDir
+		// write logic to get all the java files in srcDir through iteration
 		String[] files = new String[1];
 		files[0] = new String(
 				"/Users/harsha.muktamath/Documents/college/uml-parser/src/main/java/uml_parser/uml_parser/Table.java");
