@@ -1,10 +1,13 @@
 package uml_parser.uml_parser;
 
+/* This code is for generating the UML diagrams using PlantUML
+ * 
+ */
 import java.util.List;
 import java.util.Map;
 
 
-// this is for generating objects
+
 public class PlantUMLdatagenerator {
 
 	public String generateUMLData(Map<String, List<List>> classData) {

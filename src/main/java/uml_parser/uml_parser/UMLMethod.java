@@ -2,6 +2,8 @@ package uml_parser.uml_parser;
 
 import java.util.Map;
 
+
+//Class for Methods
 public class UMLMethod {
 
 	public String methName;
