@@ -1,5 +1,7 @@
 package uml_parser.uml_parser;
 
+// This is just an example class. 
+
 public class Table {
 	
 	public static final String TABLE = "table_name";
