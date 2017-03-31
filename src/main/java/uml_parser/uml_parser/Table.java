@@ -19,7 +19,10 @@ class Row{
 		return 999;
 	}
 	}	
+class Shape extends Row {
+
+}
 
 
-class Column extends Row implements java.io.Serializable{
+class Column extends Shape implements java.io.Serializable{
 }
