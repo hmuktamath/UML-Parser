@@ -31,7 +31,7 @@ public class Main {
 
 		String umlData = plantUMLdatagenerator.generateUMLData(completeParsedData);
 	//	System.out.println(umlData);
-		File pngFile = new File("/tmp/monday.png");
+		File pngFile = new File("/tmp/sunday.png");
 		OutputStream png = new FileOutputStream(pngFile);
 		
 		SourceStringReader reader = new SourceStringReader(umlData);

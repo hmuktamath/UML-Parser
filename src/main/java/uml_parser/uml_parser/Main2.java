@@ -92,7 +92,7 @@ public class Main2 {
 
 					arguments.put(parameter.asField().getName(), parameter.asField().getType().toString());
 				}
-				umlMeth.arguments = arguments;
+			//	umlMeth.arguments = arguments;
 				methodList.add(umlMeth);
 				// umlMeth.arguments = (String[]) parameterArray.toArray();
 

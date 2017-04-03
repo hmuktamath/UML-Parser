@@ -1,7 +1,6 @@
 package uml_parser.uml_parser;
 
-import java.util.Map;
-
+import java.util.List;
 
 //Class for Methods
 public class UMLMethod {
@@ -10,6 +9,18 @@ public class UMLMethod {
 	public String methAccessSpecifier;
 	public String methReturnType;
 
-	public Map<String, String> arguments;
+	public List<Argument> arguments;
 
+}
+
+class Argument {
+
+	String name;
+	String type;
+
+	public Argument(String name, String type) {
+		super();
+		this.name = name;
+		this.type = type;
+	}
 }

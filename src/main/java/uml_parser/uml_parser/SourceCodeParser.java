@@ -13,8 +13,9 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.Modifier;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
 import com.github.javaparser.ast.body.MethodDeclaration;
-import com.github.javaparser.ast.body.VariableDeclarator;
+import com.github.javaparser.ast.body.Parameter;
 import com.github.javaparser.ast.type.ClassOrInterfaceType;
 import com.github.javaparser.ast.type.TypeParameter;
 
@@ -47,29 +48,35 @@ public class SourceCodeParser {
 				parentClassList = new ArrayList<>();
 				parentClassList.add(no.getNameAsString());
 			}
-			for (VariableDeclarator vd : a.getNodesByType(VariableDeclarator.class)) {
+
+			NodeList<ClassOrInterfaceType> parentInterfaces = a.getImplementedTypes();
+
+			List<String> parentInterfaceList = null;
+			for (ClassOrInterfaceType no : parentInterfaces) {
+				parentInterfaceList = new ArrayList<>();
+				parentInterfaceList.add(no.getNameAsString());
+			}
+
+			for (FieldDeclaration vd : a.getNodesByType(FieldDeclaration.class)) {
 				UMLVariable umlVar;
 				umlVar = new UMLVariable();
-				umlVar.varName = vd.getNameAsString();
-				umlVar.varType = vd.getType().toString();
-				System.out.println(vd);
+				umlVar.varName = vd.getVariable(0).getName().toString();
+				// umlVar.varType = vd.getElementType().toString();
+				umlVar.varType = vd.getVariable(0).getType().toString();
+				if (vd.isPublic()) {
+					umlVar.accessSpecifier = "public";
+				} else if (vd.isPrivate()) {
+					umlVar.accessSpecifier = "private";
+				} else if (vd.isProtected()) {
+					umlVar.accessSpecifier = "protected";
+				} else {
+					umlVar.accessSpecifier = "public";
+				}
 
 				variableList.add(umlVar);
 				System.out.println("#### " + variableList);
 
 			}
-
-			
-//			for (FieldDeclaration vd : a.getNodesByType(FieldDeclaration.class)) {
-//				UMLVariable umlVar;
-//				umlVar = new UMLVariable();
-//				umlVar.varName = vd.;
-//				umlVar.varType = vd.getElementType().toString();
-//
-//				variableList.add(umlVar);
-//				System.out.println("#### " + variableList);
-//
-//			}
 
 			for (MethodDeclaration md : a.getNodesByType(MethodDeclaration.class))
 
@@ -78,6 +85,11 @@ public class SourceCodeParser {
 				umlMeth = new UMLMethod();
 				umlMeth.methName = md.getNameAsString();
 				umlMeth.methReturnType = md.getType().toString();
+				List<Argument> arguments = new ArrayList<Argument>();
+				for (Parameter p : md.getParameters()) {
+					arguments.add(new Argument(p.getName().toString(), p.getType().toString()));
+				}
+				umlMeth.arguments = arguments;
 				EnumSet<Modifier> modifiers = md.getModifiers();
 				umlMeth.methAccessSpecifier = modifiers.contains(Modifier.PRIVATE) ? "private" : "public";
 
@@ -89,10 +101,11 @@ public class SourceCodeParser {
 				methodList.add(umlMeth);
 
 			}
-             // Indexing in a List  
+			// Indexing in a List
 			classContents.add(0, variableList);
 			classContents.add(1, methodList);
-		    classContents.add(2, parentClassList);
+			classContents.add(2, parentClassList);
+			classContents.add(3, parentInterfaceList);
 
 			parsedData.put(a.getNameAsString(), classContents);
 
