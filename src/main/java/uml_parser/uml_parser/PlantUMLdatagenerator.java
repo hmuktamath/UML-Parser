@@ -38,7 +38,8 @@ public class PlantUMLdatagenerator {
 
 				umldata.append(asSymbol + umlVariable.varName + " : " + umlVariable.varType + "\n");
 			}
-
+  
+			// Creating PlantUML specs for methods.
 			List<UMLMethod> methodContents = classData.get(className).get(1);
 			for (UMLMethod umlMethods : methodContents) {
 				String accessSpecifier = umlMethods.methAccessSpecifier;
