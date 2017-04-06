@@ -31,7 +31,8 @@ public class PlantUMLdatagenerator {
 					asSymbol = "#";
 					break;
 
-
+				default:
+					asSymbol = "+";
 
 				}
 
