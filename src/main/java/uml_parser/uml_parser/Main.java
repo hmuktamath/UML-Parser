@@ -36,10 +36,7 @@ public class Main {
 		File pngFile = new File("/tmp/sunday.png");
 		OutputStream png = new FileOutputStream(pngFile);
 		
-		SourceStringReader reader = new SourceStringReader(umlData);
-		// Write the first image to "png"
-		String desc = reader.generateImage(png);
-		// Use Platnt UML lib to generate image with uml data as input.
+		
 
 	}
 
