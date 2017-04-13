@@ -7,6 +7,9 @@ public class UMLVariable {
 	public String varType;
 	public String accessSpecifier;
 
-
+	@Override
+	public String toString() {
+		return varName + " " + varType+" "+accessSpecifier;
+	}
 
 }
