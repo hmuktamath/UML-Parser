@@ -105,6 +105,7 @@ public class SourceCodeParser {
 			classContents.add(0, variableList);
 			classContents.add(1, methodList);
 			classContents.add(2, parentClassList);
+			classContents.add(3, parentInterfaceList);
 			
 
 			parsedData.put(a.getNameAsString(), classContents);
