@@ -53,12 +53,7 @@ public class PlantUMLdatagenerator {
 					asSymbol = "-";
 					break;
 
-				case "protected":
-					asSymbol = "#";
-					break;
-
-				default:
-					asSymbol = "+";
+				
 
 				}
 
