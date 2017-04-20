@@ -84,9 +84,9 @@ public class Main2 {
 			{
 				UMLMethod umlMeth;
 				umlMeth = new UMLMethod();
-				umlMeth.methName = md.getName();
-				umlMeth.methReturnType = md.getDeclaration().getReturnType().toString();
-				umlMeth.methAccessSpecifier = md.getDeclaration().accessLevel().toString();
+				umlMeth.name = md.getName();
+				umlMeth.returnType = md.getDeclaration().getReturnType().toString();
+				umlMeth.accessSpecifier = md.getDeclaration().accessLevel().toString();
 				Map<String, String> arguments = new HashMap<String, String>();
 				for (TypeParameterDeclaration parameter : md.getDeclaration().getTypeParameters()) {
 
