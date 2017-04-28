@@ -208,7 +208,7 @@ public class PlantUMLdatagenerator {
 
 		}
 
-		// umldata.append("B" + " -- " + "A" + "\n");
+
 		umldata.append("@enduml\n");
 		return umldata.toString();
 	}

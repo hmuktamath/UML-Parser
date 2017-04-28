@@ -2,7 +2,7 @@ package uml_parser.uml_parser;
 
 import java.util.List;
 
-//Class for Methods
+//Class for Methods and arguments
 public class UMLMethod {
 
 	public String name;

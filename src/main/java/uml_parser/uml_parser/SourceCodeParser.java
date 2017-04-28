@@ -27,28 +27,19 @@ public class SourceCodeParser {
 	String variableType = null;
 
 	public Map<String, List<List>> getParsedData(File file) throws FileNotFoundException, ClassNotFoundException {
-		// File file2 = new File(file);
 		CompilationUnit compilationUnit = JavaParser.parse(file);
-
 		List<ClassOrInterfaceDeclaration> classdeclarations = (List<ClassOrInterfaceDeclaration>) compilationUnit
 				.getNodesByType(ClassOrInterfaceDeclaration.class);
-
 		Map<String, List<List>> parsedData = new HashMap<String, List<List>>();
-
 		for (ClassOrInterfaceDeclaration a : classdeclarations) {
-
 			List<UMLMethod> methodList = new ArrayList<>();
 			List<UMLMethod> constructorList = new ArrayList<>();
 			List<UMLVariable> variableList = new ArrayList<>();
 			className = a.getNameAsString();
-
 			HashMap<String, Object> metadata = new HashMap<String, Object>();
 			metadata.put("isInterface", a.isInterface());
-
 			List classContents = new ArrayList<>();
-
 			NodeList<ClassOrInterfaceType> c = a.getExtendedTypes();
-
 			List<String> parentClassList = null;
 			parentClassList = new ArrayList<>();
 			for (ClassOrInterfaceType no : c) {
@@ -66,8 +57,7 @@ public class SourceCodeParser {
 			for (FieldDeclaration vd : a.getNodesByType(FieldDeclaration.class)) {
 				UMLVariable umlVar;
 				umlVar = new UMLVariable();
-				umlVar.varName = vd.getVariable(0).getName().toString();
-				// umlVar.varType = vd.getElementType().toString();
+				umlVar.varName = vd.getVariable(0).getName().toString();				
 				umlVar.varType = vd.getVariable(0).getType().toString();
 				if (vd.isPublic()) {
 					umlVar.accessSpecifier = "public";
@@ -103,9 +93,7 @@ public class SourceCodeParser {
 				for (TypeParameter parameter : md.getTypeParameters()) {
 					parameterArray.add(parameter.getElementType().toString());
 				}
-
 				methodList.add(umlMeth);
-
 			}
 
 			for (ConstructorDeclaration cd : a.getNodesByType(ConstructorDeclaration.class)) {

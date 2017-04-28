@@ -13,10 +13,10 @@ import net.sourceforge.plantuml.SourceStringReader;
 
 public class Main {
 
-	static Logger logger = Logger.getLogger(Main.class);
+	//static Logger logger = Logger.getLogger(Main.class);
 
 	public static void main(String[] input) throws IOException, ClassNotFoundException {
-		logger.info("Starting application");
+		//logger.info("Starting application");
 		String sourceFolder = input[0];
 		String destination = input[1];
 
@@ -34,8 +34,9 @@ public class Main {
 			}
 		});
 
+		System.out.println("Listing all the Java files under test");
 		for (File file : listOfFiles) {
-
+			
 			System.out.println(file.getName());
 
 		}
@@ -43,22 +44,19 @@ public class Main {
 		Map<String, List> completeParsedData = new HashMap<String, List>();
 		SourceCodeParser srcParser = new SourceCodeParser();
 		PlantUMLdatagenerator plantUMLdatagenerator = new PlantUMLdatagenerator();
-
+		System.out.println("Start Parsing all the Java files now ------> ");
 		for (File file : listOfFiles) {
-			System.out.println("Going through the file : " + file);
+			//System.out.println("Going through the file : " + file);
 			Map<String, List<List>> parsedDataofFile = srcParser.getParsedData(file);
 			completeParsedData.putAll(parsedDataofFile);
 		}
 
 		String umlData = plantUMLdatagenerator.generateUMLData(completeParsedData);
-		// System.out.println(umlData);
 		File pngFile = new File(destination);
 		OutputStream png = new FileOutputStream(pngFile);
-
 		SourceStringReader reader = new SourceStringReader(umlData);
-		// Write the first image to "png"
 		String desc = reader.generateImage(png);
-		// Use Platnt UML lib to generate image with uml data as input.
+		
 
 	}
 
