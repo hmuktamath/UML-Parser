@@ -1,31 +1,25 @@
 package uml_parser.uml_parser;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.nio.file.DirectoryStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
-import javax.swing.filechooser.FileFilter;
-
-import net.sourceforge.plantuml.FileUtils;
 import net.sourceforge.plantuml.SourceStringReader;
 
 public class Main {
 
+	static Logger logger = Logger.getLogger(Main.class);
+
 	public static void main(String[] input) throws IOException, ClassNotFoundException {
-	
+		logger.info("Starting application");
 		String sourceFolder = input[0];
 		String destination = input[1];
-		
+
 		File folder = new File(sourceFolder);
 
 		File[] listOfFiles = folder.listFiles(new java.io.FileFilter() {
@@ -46,7 +40,6 @@ public class Main {
 
 		}
 
-	
 		Map<String, List> completeParsedData = new HashMap<String, List>();
 		SourceCodeParser srcParser = new SourceCodeParser();
 		PlantUMLdatagenerator plantUMLdatagenerator = new PlantUMLdatagenerator();

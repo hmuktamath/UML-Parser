@@ -51,6 +51,10 @@ public class PlantUMLdatagenerator {
 					asSymbol = "+";
 
 				}
+				if (asSymbol.equals("#")){
+					continue;
+				}
+				
 
 				umldata.append(asSymbol + umlVariable.varName + " : " + umlVariable.varType + "\n");
 
@@ -88,6 +92,9 @@ public class PlantUMLdatagenerator {
 				default:
 					asSymbol = "+";
 
+				}
+				if (!asSymbol.equals("+")){
+					continue;
 				}
 
 				umldata.append(asSymbol + umlMethods.name + "(");
