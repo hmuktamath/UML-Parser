@@ -9,7 +9,7 @@ Initial setup -
 • GraphViz must be installed on the system.
 	
 Instructions to execute the program
-• java –jar <jar file> <sourcefilepath> <outputfilenameandpath>
+• java –jar "jar file" "sourcefilepath" "outputfilenameandpath"
 	◦ sourcefilepath - Path to the default package folder.
 	◦ outputfilenameandpath – filename and path of the output image 
 
