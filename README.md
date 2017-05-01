@@ -7,9 +7,9 @@ Initial setup -
 	• Install Java and use any available IDE for development
 	• GraphViz must be installed on the system. 
 Instructions to execute the program
-	•	java –jar <Name of Jar File.jar> <sourcefilepath> <outputfilenameandpath>
-	◦	sourcefilepath - Path to the default package folder.
-	◦	outputfilenameandpath – filename and path of the output image 
+	• java –jar <Name of Jar File.jar> <sourcefilepath> <outputfilenameandpath>
+		◦ sourcefilepath - Path to the default package folder.
+		◦ outputfilenameandpath – filename and path of the output image 
 
 External Libraries and Tools used
 1. Javaparser
