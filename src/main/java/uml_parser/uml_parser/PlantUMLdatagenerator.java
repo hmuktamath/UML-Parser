@@ -32,7 +32,7 @@ public class PlantUMLdatagenerator {
 
 			List<UMLVariable> variableNames = (List<UMLVariable>) classData.get(className).get(0);
 			for (UMLVariable umlVariable : variableNames) {
-				/// "-str : String"+"\n"
+			
 				String asSymbol = "+";
 				switch (umlVariable.accessSpecifier) {
 				case "public":
@@ -72,7 +72,7 @@ public class PlantUMLdatagenerator {
 			}
 
 			// Creating PlantUML specs for methods.
-			List<UMLMethod> methodContents = (List<UMLMethod>) classData.get(className).get(4);
+			List<UMLMethod> methodContents = (List<UMLMethod>) classData.get(className).get(1);
 			for (UMLMethod umlMethods : methodContents) {
 				String accessSpecifier = umlMethods.accessSpecifier;
 				String asSymbol = "+";
@@ -126,7 +126,7 @@ public class PlantUMLdatagenerator {
 			}
 
 			// Creating PlantUML specs for methods.
-			List<UMLMethod> constructorContents = (List<UMLMethod>) classData.get(className).get(1);
+			List<UMLMethod> constructorContents = (List<UMLMethod>) classData.get(className).get(4);
 			for (UMLMethod umlMethods : constructorContents) {
 				String accessSpecifier = umlMethods.accessSpecifier;
 				String asSymbol = "+";

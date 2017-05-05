@@ -7,6 +7,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.github.javaparser.JavaParser;
 import com.github.javaparser.ast.CompilationUnit;
@@ -26,11 +27,13 @@ public class SourceCodeParser {
 	String variableName = null;
 	String variableType = null;
 
+	Map<String, List<List>> parsedData = null;
+
 	public Map<String, List<List>> getParsedData(File file) throws FileNotFoundException, ClassNotFoundException {
 		CompilationUnit compilationUnit = JavaParser.parse(file);
 		List<ClassOrInterfaceDeclaration> classdeclarations = (List<ClassOrInterfaceDeclaration>) compilationUnit
 				.getNodesByType(ClassOrInterfaceDeclaration.class);
-		Map<String, List<List>> parsedData = new HashMap<String, List<List>>();
+		parsedData = new HashMap<String, List<List>>();
 		for (ClassOrInterfaceDeclaration a : classdeclarations) {
 			List<UMLMethod> methodList = new ArrayList<>();
 			List<UMLMethod> constructorList = new ArrayList<>();
@@ -57,8 +60,9 @@ public class SourceCodeParser {
 			for (FieldDeclaration vd : a.getNodesByType(FieldDeclaration.class)) {
 				UMLVariable umlVar;
 				umlVar = new UMLVariable();
-				umlVar.varName = vd.getVariable(0).getName().toString();				
+				umlVar.varName = vd.getVariable(0).getName().toString();
 				umlVar.varType = vd.getVariable(0).getType().toString();
+
 				if (vd.isPublic()) {
 					umlVar.accessSpecifier = "public";
 				} else if (vd.isPrivate()) {
@@ -77,6 +81,7 @@ public class SourceCodeParser {
 			for (MethodDeclaration md : a.getNodesByType(MethodDeclaration.class))
 
 			{
+
 				UMLMethod umlMeth;
 				umlMeth = new UMLMethod();
 				umlMeth.name = md.getNameAsString();
@@ -130,12 +135,106 @@ public class SourceCodeParser {
 			parsedData.put(a.getNameAsString(), classContents);
 
 		}
-
+		checkSetterGetters();
 		return parsedData;
 	}
 
-	public Map<String, List<List>> getParsedData1(File file) {
-		// TODO Auto-generated method stub
-		return null;
+	private void checkSetterGetters() {
+		Set<String> classes = parsedData.keySet();
+		Map<String, List<List>> modifiedParsedData = new HashMap(parsedData);
+
+		for (String className : classes) {
+			List<UMLVariable> variableNames = (List<UMLVariable>) parsedData.get(className).get(0);
+			List<UMLMethod> methodContents = (List<UMLMethod>) parsedData.get(className).get(1);
+			List<UMLVariable> modifiedVariableNames = new ArrayList<UMLVariable>();
+			List<UMLMethod> modifiedMethodContents = new ArrayList<UMLMethod>(methodContents);
+
+			for (UMLVariable umlVariable : variableNames) {
+
+				String varName = umlVariable.varName;
+				String possibleGetterName = "get" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
+				String possibleSetterName = "set" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
+				System.out.println(possibleGetterName + "--- " + possibleSetterName);
+				boolean hasGetter = false, hasSetter = false;
+				for (UMLMethod umlMethod : methodContents) {
+					String methodName = umlMethod.name;
+
+					if (methodName.equals(possibleSetterName)) {
+						hasSetter = true;
+						modifiedMethodContents.remove(umlMethod);
+
+					} else if (methodName.equals(possibleGetterName)) {
+						hasGetter = true;
+						modifiedMethodContents.remove(umlMethod);
+
+					}
+					if (hasSetter && hasGetter) {
+						break;
+					}
+				}
+				if (hasSetter && hasGetter) {
+					umlVariable.varType = "public";
+
+				}
+				modifiedVariableNames.add(umlVariable);
+
+			}
+
+			modifiedParsedData.get(className).set(0, modifiedVariableNames);
+			modifiedParsedData.get(className).set(1, modifiedMethodContents);
+
+		}
+
+		parsedData = modifiedParsedData;
 	}
+
+	private void checkImplementedMethods() {
+		Set<String> classes = parsedData.keySet();
+		Map<String, List<List>> modifiedParsedData = new HashMap(parsedData);
+
+		for (String className : classes) {
+			List<UMLVariable> variableNames = (List<UMLVariable>) parsedData.get(className).get(0);
+			List<UMLMethod> methodContents = (List<UMLMethod>) parsedData.get(className).get(1);
+			List<UMLVariable> modifiedVariableNames = new ArrayList<UMLVariable>();
+			List<UMLMethod> modifiedMethodContents = new ArrayList<UMLMethod>(methodContents);
+
+			for (UMLVariable umlVariable : variableNames) {
+
+				String varName = umlVariable.varName;
+				String possibleGetterName = "get" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
+				String possibleSetterName = "set" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
+				System.out.println(possibleGetterName + "--- " + possibleSetterName);
+				boolean hasGetter = false, hasSetter = false;
+				for (UMLMethod umlMethod : methodContents) {
+					String methodName = umlMethod.name;
+
+					if (methodName.equals(possibleSetterName)) {
+						hasSetter = true;
+						modifiedMethodContents.remove(umlMethod);
+
+					} else if (methodName.equals(possibleGetterName)) {
+						hasGetter = true;
+						modifiedMethodContents.remove(umlMethod);
+
+					}
+					if (hasSetter && hasGetter) {
+						break;
+					}
+				}
+				if (hasSetter && hasGetter) {
+					umlVariable.varType = "public";
+
+				}
+				modifiedVariableNames.add(umlVariable);
+
+			}
+
+			modifiedParsedData.get(className).set(0, modifiedVariableNames);
+			modifiedParsedData.get(className).set(1, modifiedMethodContents);
+
+		}
+
+		parsedData = modifiedParsedData;
+	}
+
 }
