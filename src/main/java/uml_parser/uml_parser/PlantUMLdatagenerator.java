@@ -10,6 +10,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+
+// Using PlantUML, generate the class diagram
 public class PlantUMLdatagenerator {
 
 	public String generateUMLData(Map<String, List> classData) {
@@ -210,6 +212,7 @@ public class PlantUMLdatagenerator {
 
 
 		umldata.append("@enduml\n");
+		System.out.println("Creating Class Diagram now---->");
 		return umldata.toString();
 	}
 

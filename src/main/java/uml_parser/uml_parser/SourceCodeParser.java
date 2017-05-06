@@ -74,7 +74,7 @@ public class SourceCodeParser {
 				}
 
 				variableList.add(umlVar);
-				System.out.println("#### " + variableList);
+				//System.out.println("#### " + variableList);
 
 			}
 
@@ -139,6 +139,7 @@ public class SourceCodeParser {
 		return parsedData;
 	}
 
+	// Check for Setters and Getters and mark the variable as public instead of private
 	private void checkSetterGetters() {
 		Set<String> classes = parsedData.keySet();
 		Map<String, List<List>> modifiedParsedData = new HashMap(parsedData);
@@ -154,7 +155,7 @@ public class SourceCodeParser {
 				String varName = umlVariable.varName;
 				String possibleGetterName = "get" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
 				String possibleSetterName = "set" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
-				System.out.println(possibleGetterName + "--- " + possibleSetterName);
+				//System.out.println(possibleGetterName + "--- " + possibleSetterName);
 				boolean hasGetter = false, hasSetter = false;
 				for (UMLMethod umlMethod : methodContents) {
 					String methodName = umlMethod.name;
@@ -188,6 +189,8 @@ public class SourceCodeParser {
 		parsedData = modifiedParsedData;
 	}
 
+	// Check for the implemented methods
+	
 	private void checkImplementedMethods() {
 		Set<String> classes = parsedData.keySet();
 		Map<String, List<List>> modifiedParsedData = new HashMap(parsedData);
@@ -203,7 +206,7 @@ public class SourceCodeParser {
 				String varName = umlVariable.varName;
 				String possibleGetterName = "get" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
 				String possibleSetterName = "set" + varName.substring(0, 1).toUpperCase() + varName.substring(1);
-				System.out.println(possibleGetterName + "--- " + possibleSetterName);
+				//System.out.println(possibleGetterName + "--- " + possibleSetterName);
 				boolean hasGetter = false, hasSetter = false;
 				for (UMLMethod umlMethod : methodContents) {
 					String methodName = umlMethod.name;
