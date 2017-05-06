@@ -1,17 +1,21 @@
 # UML-Parser
 
+Refer to the pdf file for more details https://github.com/muktamath81/UML-Parser/blob/master/UML%20Parser%20Readme.pdf
 
 Java Parser UML Generator
 
-Initial setup -	
+Initial setup -
+• Install Java and use any available IDE for development. In my project, I have used Eclipse and to manage dependencies Maven.
+• GraphViz must be installed on the system. It does not have plugins, hence it has to be installed (Link- http://www.graphviz.org/Download..php)
 
-• Install Java and use any available IDE for development
-• GraphViz must be installed on the system.
-	
 Instructions to execute the program
-• java –jar "jar file" "sourcefilepath" "outputfilenameandpath"
-	◦ sourcefilepath - Path to the default package folder.
-	◦ outputfilenameandpath – filename and path of the output image 
+1) Download the package
+2) Download the test files (test*.zip) and unzip it to a location (here – sourcefilepath)
+3) Execute the code as below
+• java –jar <jar file/Renamed file> <sourcefilepath> <outputfilenameandpath>
+◦ sourcefilepath - Path to the default package folder.
+◦ outputfilenameandpath – filename and path of the output image
+
 
 External Libraries and Tools used
 1. Javaparser
